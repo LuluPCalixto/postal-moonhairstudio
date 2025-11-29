@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feliz Navidad - Paula Robles</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="book-container">
+      <!-- Página 1: Santa Claus -->
+      <div class="page page-1">
+        <div class="page-content">
+          <img
+            src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='600'><rect fill='%23f5f5f5' width='400' height='600'/><text x='50%' y='50%' text-anchor='middle' fill='%23999' font-size='20'>Imagen Santa Claus</text></svg>"
+            alt="Feliz Navidad"
+            class="santa-image"
+            id="santaImage"
+          />
+          <div class="click-instruction">Toca para abrir →</div>
+        </div>
+      </div>
+
+      <!-- Página 2: Corgi y mensaje -->
+      <div class="page page-2">
+        <div class="page-content">
+          <img
+            src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='600'><rect fill='%23f5f5f5' width='400' height='600'/><text x='50%' y='50%' text-anchor='middle' fill='%23999' font-size='20'>Imagen Corgi</text></svg>"
+            alt="Navidad con Corgi"
+            class="corgi-image"
+            id="corgiImage"
+          />
+
+          <!-- Logo con decoración navideña -->
+          <div class="logo-container">
+            <div class="snowflake snowflake-1">❄</div>
+            <div class="snowflake snowflake-2">❄</div>
+            <div class="snowflake snowflake-3">✨</div>
+            <div class="snowflake snowflake-4">✨</div>
+            <div class="star star-1">⭐</div>
+            <div class="star star-2">⭐</div>
+            <img
+              src="images/logo-MHS.png"
+              alt="Moon Hair Studio"
+              class="logo-image"
+              id="logoImage"
+            />
+          </div>
+
+          <div class="message-container">
+            <p class="message-text">
+              Gracias por permitirnos compartir contigo un año más.<br />
+              Te deseo lo mejor para este 2026
+            </p>
+            <p class="signature">
+              Con cariño:<br /><strong>Paula Robles</strong>
+            </p>
+            <div class="discount-box">
+              <p class="discount-title">✨ 30% de descuento ✨</p>
+              <p class="discount-text">En cualquiera de nuestros servicios.</p>
+              <p class="discount-text">
+                Solo muestra esta postal el día de tu cita.<br />Promoción
+                válida para una sola ocasión.
+              </p>
+              <p class="discount-validity">
+                Válido hasta el 30 de enero de 2026.
+              </p>
+            </div>
+            <div class="close-instruction">Toca para cerrar ✕</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Cargar las imágenes
+      const santaImg = document.getElementById("santaImage");
+      const corgiImg = document.getElementById("corgiImage");
+
+      // Reemplaza con las rutas de tus imágenes
+      santaImg.src = "images/portada.jpg";
+      corgiImg.src = "images/navidad.gif";
+
+      const page1 = document.querySelector(".page-1");
+      const page2 = document.querySelector(".page-2");
+      let isOpen = false;
+
+      // Abrir la postal (voltear a página 2)
+      page1.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (!isOpen) {
+          this.classList.add("flipped");
+          isOpen = true;
+        }
+      });
+
+      // Cerrar la postal (regresar a página 1)
+      page2.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (isOpen) {
+          page1.classList.remove("flipped");
+          isOpen = false;
+        }
+      });
+    </script>
+  </body>
+</html>
