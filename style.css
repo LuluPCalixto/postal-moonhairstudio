@@ -76,11 +76,11 @@
 
         .logo-container {
             position: absolute;
-            top: 45%;
+            top: 42%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 160px;
-            height: 160px;
+            width: 200px;
+            height: 200px;
             z-index: 5;
         }
 
@@ -181,16 +181,19 @@
 
         .click-instruction {
             position: absolute;
-            bottom: 15px;
-            right: 15px;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             background: rgba(220, 38, 38, 0.95);
             color: white;
-            padding: 12px 24px;
+            padding: 14px 32px;
             border-radius: 30px;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: bold;
             animation: pulse 2s infinite;
             box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+            white-space: nowrap;
+            z-index: 10;
         }
 
         @keyframes pulse {
@@ -314,9 +317,9 @@
             }
 
             .logo-container {
-                width: 140px;
-                height: 140px;
-                top: 43%;
+                width: 180px;
+                height: 180px;
+                top: 40%;
             }
 
             .snowflake {
@@ -328,10 +331,9 @@
             }
 
             .click-instruction {
-                bottom: 12px;
-                right: 12px;
-                padding: 10px 20px;
-                font-size: 14px;
+                bottom: 16px;
+                padding: 13px 28px;
+                font-size: 15px;
             }
 
             .message-container {
@@ -382,9 +384,9 @@
             }
 
             .logo-container {
-                width: 120px;
-                height: 120px;
-                top: 41%;
+                width: 160px;
+                height: 160px;
+                top: 38%;
             }
 
             .message-container {
