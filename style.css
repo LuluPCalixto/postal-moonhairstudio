@@ -298,104 +298,128 @@
         }
 
         @media (max-width: 768px) {
-            body {
-                padding: 5px;
-            }
+    body {
+        padding: 5px;
+    }
 
-            .book-container {
-                max-width: 100%;
-                height: 85vh;
-                aspect-ratio: unset;
-            }
+    .book-container {
+        max-width: 100%;
+        height: 100vh;
+        aspect-ratio: 3/4;
+    }
 
-            .page {
-                border-radius: 6px;
-            }
+    .page {
+        border-radius: 6px;
+    }
 
-            .santa-image {
-                padding: 15px;
-            }
+    .santa-image {
+        padding: 15px;
+    }
 
-            .logo-container {
-                width: 180px;
-                height: 180px;
-                top: 40%;
-            }
+    .logo-container {
+        width: 150px;
+        height: 150px;
+        top: 45%;
+    }
 
-            .snowflake {
-                font-size: 20px;
-            }
+    .snowflake {
+        font-size: 18px;
+    }
 
-            .star {
-                font-size: 14px;
-            }
+    .star {
+        font-size: 12px;
+    }
 
-            .click-instruction {
-                bottom: 16px;
-                padding: 13px 28px;
-                font-size: 15px;
-            }
+    .click-instruction {
+        bottom: 20px;
+        padding: 12px 26px;
+        font-size: 14px;
+    }
 
-            .message-container {
-                padding: 18px 15px 20px 15px;
-                max-height: 48%;
-            }
+    .message-container {
+        padding: 16px 14px 20px 14px;
+        max-height: 50%;
+    }
 
-            .message-text {
-                font-size: 13px;
-                margin-bottom: 7px;
-            }
+    .message-text {
+        font-size: 12px;
+        line-height: 1.4;
+        margin-bottom: 6px;
+    }
 
-            .signature {
-                font-size: 14px;
-                margin-bottom: 8px;
-            }
+    .signature {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
 
-            .signature strong {
-                font-size: 16px;
-            }
+    .signature strong {
+        font-size: 15px;
+    }
 
-            .discount-box {
-                padding: 10px;
-                margin-top: 6px;
-            }
+    .discount-box {
+        padding: 10px;
+        margin-top: 6px;
+    }
 
-            .discount-title {
-                font-size: 16px;
-            }
+    .discount-title {
+        font-size: 15px;
+    }
 
-            .discount-text {
-                font-size: 13px;
-            }
+    .discount-text {
+        font-size: 12px;
+        margin-bottom: 3px;
+    }
 
-            .discount-validity {
-                font-size: 10px;
-            }
+    .discount-validity {
+        font-size: 10px;
+    }
 
-            .close-instruction {
-                font-size: 11px;
-                margin-top: 6px;
-            }
-        }
+    .close-instruction {
+        font-size: 11px;
+        margin-top: 6px;
+    }
+}
 
-        @media (max-width: 480px) {
-            .book-container {
-                height: 90vh;
-            }
+@media (max-width: 480px) {
+    .book-container {
+        height: 100vh;
+        aspect-ratio: 3/4;
+    }
 
-            .logo-container {
-                width: 160px;
-                height: 160px;
-                top: 38%;
-            }
+    .logo-container {
+        width: 140px;
+        height: 140px;
+        top: 45%;
+    }
 
-            .message-container {
-                max-height: 46%;
-            }
-        }
+    .message-container {
+        max-height: 48%;
+        padding: 14px 12px 18px 12px;
+    }
 
-        @media (hover: none) and (pointer: coarse) {
-            .page {
-                -webkit-tap-highlight-color: transparent;
-            }
-        }
+    .message-text {
+        font-size: 11px;
+    }
+
+    .signature {
+        font-size: 12px;
+    }
+
+    .signature strong {
+        font-size: 14px;
+    }
+
+    .discount-title {
+        font-size: 14px;
+    }
+
+    .discount-text {
+        font-size: 11px;
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .page {
+        -webkit-tap-highlight-color: transparent;
+    }
+}
