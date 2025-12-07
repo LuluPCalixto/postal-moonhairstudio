@@ -145,12 +145,30 @@
      font-weight: 300;
  }
 
+ @keyframes move-rainbow {
+     0% {
+         background-position: 0% 50%;
+     }
+
+     100% {
+         background-position: 200% 50%;
+     }
+ }
+
  .signature {
+     font-family: 'Dancing Script', cursive;
      font-weight: 700;
-     color: #fff;
-     display: block;
-     margin-top: 15px;
-     font-size: 1.1rem;
+     font-size: 2.2rem;
+     display: inline-block;
+     background: linear-gradient(to right,
+             #ff5e57, #ffc44e, #44d7b6, #5798ff, #c764ff, #ff5e57
+         );
+     background-size: 200% auto;
+     -webkit-background-clip: text;
+     background-clip: text;
+     -webkit-text-fill-color: transparent;
+     color: transparent;
+     animation: move-rainbow 4s linear infinite;
  }
 
  .coupon-ticket {
