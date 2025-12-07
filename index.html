@@ -7,14 +7,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
+        /* --- VARIABLES DE COLOR --- */
         :root {
             --primary: #1a1a2e; /* Azul noche profundo */
             --accent: #e94560; /* Rojo Navidad moderno */
             --gold: #f4d03f;   /* Dorado */
-            --glass: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass: rgba(40, 40, 55, 0.95); /* Fondo tarjeta un poco más sólido para legibilidad */
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
+        /* --- RESET BÁSICO --- */
         * {
             margin: 0;
             padding: 0;
@@ -23,9 +25,10 @@
 
         body {
             font-family: 'Lato', sans-serif;
-            background-color: #000;
+            background-color: #050510; /* Fondo muy oscuro detrás de todo */
             height: 100vh;
-            overflow: hidden; /* Evitar scroll en la intro */
+            /* Evitamos scroll doble, lo manejaremos en el overlay */
+            overflow: hidden; 
         }
 
         /* --- PANTALLA 1: INTRODUCCIÓN (Hero Image) --- */
@@ -35,7 +38,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('postal.jpg') no-repeat center center;
+            /* IMPORTANTE: Asegúrate que 'postal.jpg' existe */
+            background: url('postal.png') no-repeat center center;
             background-size: cover;
             z-index: 100;
             display: flex;
@@ -46,7 +50,7 @@
             transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
-        /* Gradiente oscuro abajo para que se lea el texto */
+        /* Gradiente oscuro abajo para que se lea el texto de intro */
         .intro-screen::after {
             content: '';
             position: absolute;
@@ -63,8 +67,6 @@
             text-align: center;
             margin-bottom: 30px;
             z-index: 101;
-            opacity: 1;
-            transition: opacity 0.5s;
         }
 
         .intro-text h1 {
@@ -90,47 +92,50 @@
             letter-spacing: 2px;
         }
 
-        /* --- PANTALLA 2: LA TARJETA MODAL --- */
+        /* --- PANTALLA 2: EL MODAL (Toda la pantalla oscura) --- */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 10, 20, 0.85); /* Fondo oscuro semitransparente */
-            backdrop-filter: blur(8px);
+            background: rgba(5, 5, 15, 0.9); /* Fondo oscuro semitransparente */
+            backdrop-filter: blur(5px);
             z-index: 50;
             opacity: 0;
-            pointer-events: none;
+            pointer-events: none; /* No interactuable hasta que se active */
             transition: opacity 0.5s ease;
+            
+            /* Centrado y manejo de scroll */
             display: flex;
             justify-content: center;
-            align-items: center;
-            overflow-y: auto; /* Permitir scroll si la pantalla es muy chica */
+            align-items: flex-start; /* Alineamos arriba para permitir scroll si es muy largo */
+            overflow-y: auto; /* Scroll en toda la pantalla si hace falta */
+            padding: 20px 0; /* Un poco de aire arriba y abajo */
         }
 
+        /* --- LA TARJETA CENTRAL --- */
         .card-glass {
             width: 90%;
-            max-width: 400px;
+            max-width: 400px; /* Ancho máximo para PC */
             background: var(--glass);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
-            padding: 0; /* Sin padding general para que la imagen pegue al borde */
             text-align: center;
-            transform: scale(0.8) translateY(50px);
+            transform: scale(0.9) translateY(30px); /* Estado inicial de la animación */
             transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            max-height: 90vh;
-            overflow-y: auto;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            /* Quitamos max-height y overflow interno para evitar el problema de corte */
+            margin: auto; /* Centrado vertical si sobra espacio */
         }
 
-        /* Cabecera de la tarjeta con el GIF */
+        /* Cabecera con GIF */
         .card-header-media {
             position: relative;
             width: 100%;
-            height: 200px;
+            height: 220px; /* Un poco más alto */
             overflow: hidden;
         }
 
@@ -140,45 +145,25 @@
             object-fit: cover;
         }
 
-        .logo-badge {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 4px solid var(--primary);
-            position: absolute;
-            bottom: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #fff;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            z-index: 2;
-        }
-
-        .logo-badge img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
         /* Cuerpo de la tarjeta */
         .card-body {
-            padding: 60px 20px 30px 20px; /* Padding top alto para compensar el logo */
+            /* Padding generoso abajo para que quepa el logo final */
+            padding: 30px 25px 50px 25px; 
             color: #fff;
         }
 
         .greeting {
             font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             color: var(--gold);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .message {
-            font-size: 0.95rem;
+            font-size: 1rem;
             line-height: 1.6;
-            color: #ddd;
-            margin-bottom: 25px;
+            color: #e0e0e0;
+            margin-bottom: 30px;
             font-weight: 300;
         }
 
@@ -186,23 +171,25 @@
             font-weight: 700;
             color: #fff;
             display: block;
-            margin-top: 10px;
+            margin-top: 15px;
+            font-size: 1.1rem;
         }
 
-        /* Cupón Estilo Ticket Dorado */
+        /* Cupón Dorado */
         .coupon-ticket {
             background: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             color: var(--primary);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
+            padding: 20px 15px;
+            border-radius: 12px;
+            margin-top: 25px;
+            margin-bottom: 30px;
             position: relative;
-            border: 1px dashed rgba(0,0,0,0.3);
-            box-shadow: 0 5px 15px rgba(244, 208, 63, 0.3);
+            box-shadow: 0 10px 25px rgba(244, 208, 63, 0.2);
+            border: 1px solid #fff;
         }
 
         .discount-big {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 800;
             display: block;
             line-height: 1;
@@ -210,29 +197,48 @@
         }
 
         .discount-details {
-            font-size: 0.75rem;
-            margin-top: 5px;
+            font-size: 0.85rem;
+            margin-top: 8px;
             font-weight: 700;
-            opacity: 0.8;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .legal {
-            font-size: 0.65rem;
-            margin-top: 8px;
+            font-size: 0.7rem;
+            margin-top: 12px;
             display: block;
-            opacity: 0.7;
+            opacity: 0.8;
         }
 
         .close-btn {
-            margin-top: 20px;
             background: transparent;
             border: 1px solid rgba(255,255,255,0.3);
-            color: rgba(255,255,255,0.6);
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            color: rgba(255,255,255,0.7);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 0.9rem;
             cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 30px; /* Espacio entre botón y logo final */
+        }
+        
+        .close-btn:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #fff;
+            color: #fff;
+        }
+
+        /* --- NUEVO ESTILO PARA EL LOGO AL FINAL --- */
+        .logo-footer {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            /* Un borde dorado para que resalte al final */
+            border: 3px solid var(--gold); 
+            margin: 0 auto; /* Centrado horizontal */
+            display: block;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
         }
 
         /* --- CLASES DE ESTADO (JS) --- */
@@ -258,7 +264,7 @@
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(233, 69, 96, 0); }
         }
 
-        /* --- EFECTO NIEVE/BRILLO (CSS PURO) --- */
+        /* --- EFECTO NIEVE/BRILLO --- */
         .snow-container {
             position: absolute;
             top: 0;
@@ -266,8 +272,8 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            overflow: hidden;
             z-index: 60;
+            overflow: hidden;
         }
         
         .snowflake {
@@ -279,10 +285,9 @@
             opacity: 0;
         }
 
-        /* Generamos movimiento para partículas */
         @keyframes fall {
             0% { transform: translateY(-10vh) translateX(0); opacity: 1; }
-            100% { transform: translateY(110vh) translateX(20px); opacity: 0; }
+            100% { transform: translateY(120vh) translateX(30px); opacity: 0; }
         }
 
     </style>
@@ -305,11 +310,7 @@
             
             <div class="card-header-media">
                 <img src="navidad.gif" alt="Navidad Perritos">
-                <div style="position:absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to bottom, transparent 70%, #1a1a2e 100%);"></div>
-            </div>
-
-            <div class="logo-badge">
-                <img src="logo-MHS.png" alt="Logo Moon">
+                <div style="position:absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to bottom, transparent 60%, var(--primary) 100%);"></div>
             </div>
 
             <div class="card-body">
@@ -318,56 +319,55 @@
                 <div class="message">
                     Gracias por permitirnos compartir contigo un año más.
                     Te deseo lo mejor y mucho brillo para este nuevo ciclo.
-                    <br><br>
+                    <br>
                     <span class="signature">Con cariño: Paula Robles</span>
                 </div>
 
                 <div class="coupon-ticket">
                     <span class="discount-big">30% OFF</span>
                     <div class="discount-details">En todos nuestros servicios</div>
-                    <small class="legal">Muestra este ticket digital • Válido hasta 30 Ene 2026 • Un solo uso</small>
+                    <small class="legal">Válido hasta 30 Ene 2026 • Un solo uso</small>
                 </div>
 
                 <button class="close-btn" onclick="location.reload()">Cerrar Postal</button>
+                
+                <img src="logo-MHS.png" alt="Logo Moon" class="logo-footer">
             </div>
         </div>
     </div>
 
     <script>
+        // JS Básico para la interacción
         function revealCard() {
-            // 1. Ocultar Intro
             document.getElementById('introScreen').classList.add('intro-hidden');
-            
-            // 2. Mostrar Modal
             const modal = document.getElementById('modalOverlay');
             modal.classList.add('modal-visible');
-
-            // 3. Activar Efecto de Nieve/Confeti
+            // Iniciar efecto de partículas
             createSnow();
         }
 
         function createSnow() {
             const container = document.getElementById('snowContainer');
-            const colors = ['#f4d03f', '#e94560', '#ffffff']; // Dorado, Rojo, Blanco
+            // Colores: Dorado, Rojo, Blanco
+            const colors = ['#f4d03f', '#e94560', '#ffffff']; 
             
-            // Crear 50 partículas
-            for (let i = 0; i < 50; i++) {
+            // Reduje la cantidad de partículas a 40 para mejorar rendimiento en móviles viejos
+            for (let i = 0; i < 40; i++) {
                 const flake = document.createElement('div');
                 flake.classList.add('snowflake');
                 
-                // Aleatoriedad
                 const left = Math.random() * 100;
-                const animDuration = Math.random() * 3 + 2; // entre 2 y 5s
-                const size = Math.random() * 8 + 4;
+                const animDuration = Math.random() * 4 + 3; // Lento y elegante
+                const size = Math.random() * 6 + 3;
                 const color = colors[Math.floor(Math.random() * colors.length)];
 
                 flake.style.left = left + '%';
                 flake.style.width = size + 'px';
                 flake.style.height = size + 'px';
                 flake.style.backgroundColor = color;
-                flake.style.animation = `fall ${animDuration}s linear forwards`;
-                flake.style.animationDelay = Math.random() * 2 + 's';
-
+                // Un pequeño retraso aleatorio para que no caigan todas de golpe
+                flake.style.animation = `fall ${animDuration}s linear forwards ${Math.random()}s`;
+                
                 container.appendChild(flake);
             }
         }
