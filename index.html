@@ -1,107 +1,376 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Feliz Navidad - Paula Robles</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="book-container">
-      <!-- Página 1: Santa Claus -->
-      <div class="page page-1">
-        <div class="page-content">
-          <img
-            src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='600'><rect fill='%23f5f5f5' width='400' height='600'/><text x='50%' y='50%' text-anchor='middle' fill='%23999' font-size='20'>Imagen Santa Claus</text></svg>"
-            alt="Feliz Navidad"
-            class="santa-image"
-            id="santaImage"
-          />
-          <div class="click-instruction">Toca para abrir →</div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Regalo de Moon Hair Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #1a1a2e; /* Azul noche profundo */
+            --accent: #e94560; /* Rojo Navidad moderno */
+            --gold: #f4d03f;   /* Dorado */
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #000;
+            height: 100vh;
+            overflow: hidden; /* Evitar scroll en la intro */
+        }
+
+        /* --- PANTALLA 1: INTRODUCCIÓN (Hero Image) --- */
+        .intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('postal.jpg') no-repeat center center;
+            background-size: cover;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding-bottom: 80px;
+            align-items: center;
+            transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        /* Gradiente oscuro abajo para que se lea el texto */
+        .intro-screen::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            z-index: -1;
+        }
+
+        .intro-text {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            z-index: 101;
+            opacity: 1;
+            transition: opacity 0.5s;
+        }
+
+        .intro-text h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .main-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(233, 69, 96, 0.6);
+            cursor: pointer;
+            z-index: 101;
+            animation: pulse-glow 2s infinite;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- PANTALLA 2: LA TARJETA MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 20, 0.85); /* Fondo oscuro semitransparente */
+            backdrop-filter: blur(8px);
+            z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto; /* Permitir scroll si la pantalla es muy chica */
+        }
+
+        .card-glass {
+            width: 90%;
+            max-width: 400px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 0; /* Sin padding general para que la imagen pegue al borde */
+            text-align: center;
+            transform: scale(0.8) translateY(50px);
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        /* Cabecera de la tarjeta con el GIF */
+        .card-header-media {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-header-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-badge {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid var(--primary);
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            z-index: 2;
+        }
+
+        .logo-badge img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Cuerpo de la tarjeta */
+        .card-body {
+            padding: 60px 20px 30px 20px; /* Padding top alto para compensar el logo */
+            color: #fff;
+        }
+
+        .greeting {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .message {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #ddd;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .signature {
+            font-weight: 700;
+            color: #fff;
+            display: block;
+            margin-top: 10px;
+        }
+
+        /* Cupón Estilo Ticket Dorado */
+        .coupon-ticket {
+            background: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            color: var(--primary);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            position: relative;
+            border: 1px dashed rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(244, 208, 63, 0.3);
+        }
+
+        .discount-big {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+            line-height: 1;
+            font-family: 'Cinzel', serif;
+        }
+
+        .discount-details {
+            font-size: 0.75rem;
+            margin-top: 5px;
+            font-weight: 700;
+            opacity: 0.8;
+            text-transform: uppercase;
+        }
+
+        .legal {
+            font-size: 0.65rem;
+            margin-top: 8px;
+            display: block;
+            opacity: 0.7;
+        }
+
+        .close-btn {
+            margin-top: 20px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.6);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        /* --- CLASES DE ESTADO (JS) --- */
+        .intro-hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .modal-visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-visible .card-glass {
+            transform: scale(1) translateY(0);
+        }
+
+        /* --- ANIMACIONES --- */
+        @keyframes pulse-glow {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(233, 69, 96, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(233, 69, 96, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(233, 69, 96, 0); }
+        }
+
+        /* --- EFECTO NIEVE/BRILLO (CSS PURO) --- */
+        .snow-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 60;
+        }
+        
+        .snowflake {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        /* Generamos movimiento para partículas */
+        @keyframes fall {
+            0% { transform: translateY(-10vh) translateX(0); opacity: 1; }
+            100% { transform: translateY(110vh) translateX(20px); opacity: 0; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="intro-screen" id="introScreen">
+        <div class="intro-text">
+            <h1>Moon Hair Studio</h1>
+            <p>Tiene un mensaje para ti...</p>
         </div>
-      </div>
+        <button class="main-btn" onclick="revealCard()">Abrir Regalo 🎁</button>
+    </div>
 
-      <!-- Página 2: Corgi y mensaje -->
-      <div class="page page-2">
-        <div class="page-content">
-          <img
-            src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='600'><rect fill='%23f5f5f5' width='400' height='600'/><text x='50%' y='50%' text-anchor='middle' fill='%23999' font-size='20'>Imagen Corgi</text></svg>"
-            alt="Navidad con Corgi"
-            class="corgi-image"
-            id="corgiImage"
-          />
+    <div class="modal-overlay" id="modalOverlay">
+        
+        <div class="snow-container" id="snowContainer"></div>
 
-          <!-- Logo con decoración navideña -->
-          <div class="logo-container">
-            <div class="snowflake snowflake-1">❄</div>
-            <div class="snowflake snowflake-2">❄</div>
-            <div class="snowflake snowflake-3">✨</div>
-            <div class="snowflake snowflake-4">✨</div>
-            <div class="star star-1">⭐</div>
-            <div class="star star-2">⭐</div>
-            <img
-              src="images/logo-MHS.png"
-              alt="Moon Hair Studio"
-              class="logo-image"
-              id="logoImage"
-            />
-          </div>
-
-          <div class="message-container">
-            <p class="message-text">
-              Gracias por permitirnos compartir contigo un año más.<br />
-              Te deseo lo mejor para este 2026
-            </p>
-            <p class="signature">
-              Con cariño:<br /><strong>Paula Robles</strong>
-            </p>
-            <div class="discount-box">
-              <p class="discount-title">✨ 30% de descuento ✨</p>
-              <p class="discount-text">En cualquiera de nuestros servicios.</p>
-              <p class="discount-text">
-                Solo muestra esta postal el día de tu cita.<br />Promoción
-                válida para una sola ocasión.
-              </p>
-              <p class="discount-validity">
-                Válido hasta el 30 de enero de 2026.
-              </p>
+        <div class="card-glass">
+            
+            <div class="card-header-media">
+                <img src="navidad.gif" alt="Navidad Perritos">
+                <div style="position:absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to bottom, transparent 70%, #1a1a2e 100%);"></div>
             </div>
-            <div class="close-instruction">Toca para cerrar ✕</div>
-          </div>
+
+            <div class="logo-badge">
+                <img src="logo-MHS.png" alt="Logo Moon">
+            </div>
+
+            <div class="card-body">
+                <h2 class="greeting">¡Feliz 2026!</h2>
+                
+                <div class="message">
+                    Gracias por permitirnos compartir contigo un año más.
+                    Te deseo lo mejor y mucho brillo para este nuevo ciclo.
+                    <br><br>
+                    <span class="signature">Con cariño: Paula Robles</span>
+                </div>
+
+                <div class="coupon-ticket">
+                    <span class="discount-big">30% OFF</span>
+                    <div class="discount-details">En todos nuestros servicios</div>
+                    <small class="legal">Muestra este ticket digital • Válido hasta 30 Ene 2026 • Un solo uso</small>
+                </div>
+
+                <button class="close-btn" onclick="location.reload()">Cerrar Postal</button>
+            </div>
         </div>
-      </div>
     </div>
 
     <script>
-      // Cargar las imágenes
-      const santaImg = document.getElementById("santaImage");
-      const corgiImg = document.getElementById("corgiImage");
+        function revealCard() {
+            // 1. Ocultar Intro
+            document.getElementById('introScreen').classList.add('intro-hidden');
+            
+            // 2. Mostrar Modal
+            const modal = document.getElementById('modalOverlay');
+            modal.classList.add('modal-visible');
 
-      // Reemplaza con las rutas de tus imágenes
-      santaImg.src = "images/portada.jpg";
-      corgiImg.src = "images/navidad.gif";
-
-      const page1 = document.querySelector(".page-1");
-      const page2 = document.querySelector(".page-2");
-      let isOpen = false;
-
-      // Abrir la postal (voltear a página 2)
-      page1.addEventListener("click", function (e) {
-        e.stopPropagation();
-        if (!isOpen) {
-          this.classList.add("flipped");
-          isOpen = true;
+            // 3. Activar Efecto de Nieve/Confeti
+            createSnow();
         }
-      });
 
-      // Cerrar la postal (regresar a página 1)
-      page2.addEventListener("click", function (e) {
-        e.stopPropagation();
-        if (isOpen) {
-          page1.classList.remove("flipped");
-          isOpen = false;
+        function createSnow() {
+            const container = document.getElementById('snowContainer');
+            const colors = ['#f4d03f', '#e94560', '#ffffff']; // Dorado, Rojo, Blanco
+            
+            // Crear 50 partículas
+            for (let i = 0; i < 50; i++) {
+                const flake = document.createElement('div');
+                flake.classList.add('snowflake');
+                
+                // Aleatoriedad
+                const left = Math.random() * 100;
+                const animDuration = Math.random() * 3 + 2; // entre 2 y 5s
+                const size = Math.random() * 8 + 4;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+
+                flake.style.left = left + '%';
+                flake.style.width = size + 'px';
+                flake.style.height = size + 'px';
+                flake.style.backgroundColor = color;
+                flake.style.animation = `fall ${animDuration}s linear forwards`;
+                flake.style.animationDelay = Math.random() * 2 + 's';
+
+                container.appendChild(flake);
+            }
         }
-      });
     </script>
-  </body>
+</body>
 </html>
