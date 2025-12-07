@@ -1,85 +1,108 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>Regalo de Moon Hair Studio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"/>
-</head>
-<body>
-
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="intro-screen" id="introScreen">
-        <div class="intro-text">
-            <h1>Moon Hair Studio</h1>
-            <p>Tiene un mensaje para ti...</p>
-        </div>
-        <button class="main-btn" onclick="revealCard()">Abrir Regalo 🎁</button>
+      <div class="intro-text">
+        <h1>Moon Hair Studio</h1>
+        <p>Tiene un mensaje para ti...</p>
+      </div>
+      <button class="main-btn" onclick="revealCard()">Abrir Regalo 🎁</button>
     </div>
 
     <div class="modal-overlay" id="modalOverlay">
-        
-        <div class="snow-container" id="snowContainer"></div>
+      <div class="snow-container" id="snowContainer"></div>
 
-        <div class="card-glass">
-            
-            <div class="card-header-media">
-                <img src="images/navidad.gif" alt="Navidad Perritos">
-                <div style="position:absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to bottom, transparent 60%, var(--primary) 100%);"></div>
-            </div>
-
-            <div class="card-body">
-                <h2 class="greeting">¡Feliz 2026!</h2>
-                
-                <div class="message">
-                    Que todo lo que llegue sea mejor que lo que buscas, dure más de lo que esperas y te haga más feliz de lo que pudiste imaginar. <br><br>
-                    <br>
-                    <span class="signature">Con cariño: Paula Robles</span>
-                </div>
-
-                <div class="coupon-ticket">
-                    <span class="discount-big">30% OFF</span>
-                    <div class="discount-details">En todos nuestros servicios</div>
-                    <small class="legal">Válido hasta 31 Ene 2026 • Un solo uso • Aplica en el servicio que elijas</small>
-                </div>
-
-                <button class="close-btn" onclick="location.reload()">Cerrar Postal</button>
-                
-                <img src="images/logo-MHS.png" alt="Logo Moon" class="logo-footer">
-            </div>
+      <div class="card-glass">
+        <div class="card-header-media">
+          <img src="images/navidad.gif" alt="Navidad Perritos" />
+          <div
+            style="
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: linear-gradient(
+                to bottom,
+                transparent 60%,
+                var(--primary) 100%
+              );
+            "
+          ></div>
         </div>
+
+        <div class="card-body">
+          <h2 class="greeting">¡Feliz 2026!</h2>
+
+          <div class="message">
+            Que todo lo que llegue sea mejor que lo que buscas, dure más de lo
+            que esperas y te haga más feliz de lo que pudiste imaginar.
+            <br /> Me encantó verte brillar este año.<br />
+            <br />
+            <span class="signature">Con cariño: Paula Robles</span>
+          </div>
+
+          <div class="coupon-ticket">
+            <span class="discount-big">30% OFF</span>
+            <div class="discount-details">En todos nuestros servicios</div>
+            <small class="legal"
+              >Válido hasta 31 Ene 2026 • Un solo uso • Aplica en el servicio
+              que elijas</small
+            >
+          </div>
+
+          <button class="close-btn" onclick="location.reload()">
+            Cerrar Postal
+          </button>
+
+          <img src="images/logo-MHS.png" alt="Logo Moon" class="logo-footer" />
+        </div>
+      </div>
     </div>
 
     <script>
-        function revealCard() {
-            document.getElementById('introScreen').classList.add('intro-hidden');
-            const modal = document.getElementById('modalOverlay');
-            modal.classList.add('modal-visible');
-            createSnow();
-        }
+      function revealCard() {
+        document.getElementById("introScreen").classList.add("intro-hidden");
+        const modal = document.getElementById("modalOverlay");
+        modal.classList.add("modal-visible");
+        createSnow();
+      }
 
-        function createSnow() {
-            const container = document.getElementById('snowContainer');
-            const colors = ['#f4d03f', '#e94560', '#ffffff']; 
-            
-            for (let i = 0; i < 40; i++) {
-                const flake = document.createElement('div');
-                flake.classList.add('snowflake');
-                
-                const left = Math.random() * 100;
-                const animDuration = Math.random() * 4 + 3; 
-                const size = Math.random() * 6 + 3;
-                const color = colors[Math.floor(Math.random() * colors.length)];
+      function createSnow() {
+        const container = document.getElementById("snowContainer");
+        const colors = ["#f4d03f", "#e94560", "#ffffff"];
 
-                flake.style.left = left + '%';
-                flake.style.width = size + 'px';
-                flake.style.height = size + 'px';
-                flake.style.backgroundColor = color;
-                flake.style.animation = `fall ${animDuration}s linear forwards ${Math.random()}s`;
-                
-                container.appendChild(flake);
-            }
+        for (let i = 0; i < 40; i++) {
+          const flake = document.createElement("div");
+          flake.classList.add("snowflake");
+
+          const left = Math.random() * 100;
+          const animDuration = Math.random() * 4 + 3;
+          const size = Math.random() * 6 + 3;
+          const color = colors[Math.floor(Math.random() * colors.length)];
+
+          flake.style.left = left + "%";
+          flake.style.width = size + "px";
+          flake.style.height = size + "px";
+          flake.style.backgroundColor = color;
+          flake.style.animation = `fall ${animDuration}s linear forwards ${Math.random()}s`;
+
+          container.appendChild(flake);
         }
+      }
     </script>
-</body>
+  </body>
 </html>
